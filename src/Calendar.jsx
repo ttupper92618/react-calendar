@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import mergeClassNames from 'merge-class-names';
-
-import Navigation from './Calendar/Navigation';
-import CenturyView from './CenturyView';
-import DecadeView from './DecadeView';
-import YearView from './YearView';
-import MonthView from './MonthView';
-
 import {
-  getBegin, getBeginNext, getEnd, getValueRange,
+  getBegin,
+  getBeginNext,
+  getEnd,
+  getValueRange,
 } from './shared/dates';
 import {
-  isCalendarType, isClassName, isMaxDate, isMinDate, isValue, isView,
+  isCalendarType,
+  isClassName,
+  isMaxDate,
+  isMinDate,
+  isValue,
+  isView,
 } from './shared/propTypes';
+
+import CenturyView from './CenturyView';
+import DecadeView from './DecadeView';
+import MonthView from './MonthView';
+import Navigation from './Calendar/Navigation';
+import PropTypes from 'prop-types';
+import YearView from './YearView';
 import { between } from './shared/utils';
+import mergeClassNames from 'merge-class-names';
 
 const baseClassName = 'react-calendar';
 const allViews = ['century', 'decade', 'year', 'month'];
@@ -416,6 +423,14 @@ export default class Calendar extends Component {
       }
     })();
 
+    /*const clickElement = event.target.tagName === 'BUTTON' ? event.currentTarget : event.nativeEvent.srcElement.parentElement;
+    const selectionState = clickElement.getAttribute('data-selected');
+    if (selectionState === 'false' || !selectionState) {
+      clickElement.setAttribute('data-selected', 'true');
+    } else {
+      clickElement.setAttribute('data-selected', 'false');
+    }*/
+    
     if (callback) callback(value, event);
   }
 
@@ -443,6 +458,7 @@ export default class Calendar extends Component {
     } = this;
     const {
       calendarType,
+      dayMarker,
       locale,
       maxDate,
       minDate,
@@ -463,6 +479,7 @@ export default class Calendar extends Component {
 
     const commonProps = {
       activeStartDate,
+      dayMarker,
       hover,
       locale,
       maxDate,
@@ -614,6 +631,11 @@ export default class Calendar extends Component {
           onMouseLeave={selectRange ? onMouseLeave : null}
         >
           {this.renderContent()}
+          {showDoubleView && (
+            <div className={`${baseClassName}__separatorWrapper`}>
+              <div className={`${baseClassName}__separator`}></div>
+            </div>
+          )}
           {showDoubleView && this.renderContent(true)}
         </div>
       </div>
@@ -640,6 +662,10 @@ Calendar.propTypes = {
   allowPartialRange: PropTypes.bool,
   calendarType: isCalendarType,
   className: isClassName,
+  dayMarker: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.node,
+  ]),
   defaultActiveStartDate: isActiveStartDate,
   defaultValue: isLooseValue,
   defaultView: isView,

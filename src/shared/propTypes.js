@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
-
 import { CALENDAR_TYPES } from './const';
+import PropTypes from 'prop-types';
 
 const calendarTypes = Object.values(CALENDAR_TYPES);
 const allViews = ['century', 'decade', 'year', 'month'];
@@ -85,6 +84,10 @@ isView.isRequired = (props, propName, componentName) => {
 
 export const tileGroupProps = {
   activeStartDate: PropTypes.instanceOf(Date).isRequired,
+  dayMarker: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.node,
+  ]),
   hover: PropTypes.instanceOf(Date),
   locale: PropTypes.string,
   maxDate: isMaxDate,
@@ -107,6 +110,10 @@ export const tileProps = {
   activeStartDate: PropTypes.instanceOf(Date).isRequired,
   classes: PropTypes.arrayOf(PropTypes.string).isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
+  dayMarker: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.node,
+  ]),
   locale: PropTypes.string,
   maxDate: isMaxDate,
   minDate: isMinDate,
