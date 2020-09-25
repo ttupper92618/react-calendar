@@ -1,8 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
 import Flex from './Flex';
-
+import PropTypes from 'prop-types';
+import React from 'react';
 import { getTileClasses } from './shared/utils';
 import { tileGroupProps } from './shared/propTypes';
 
@@ -10,6 +8,7 @@ export default function TileGroup({
   className,
   count = 3,
   dateTransform,
+  dayOfWeek,
   dateType,
   end,
   hover,

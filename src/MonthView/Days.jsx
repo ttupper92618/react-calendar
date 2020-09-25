@@ -1,16 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {
-  getYear,
-  getMonth,
   getDaysInMonth,
+  getMonth,
+  getYear,
 } from '@wojtekmaj/date-utils';
-
-import TileGroup from '../TileGroup';
-import Day from './Day';
-
-import { getDayOfWeek } from '../shared/dates';
 import { isCalendarType, tileGroupProps } from '../shared/propTypes';
+
+import Day from './Day';
+import PropTypes from 'prop-types';
+import React from 'react';
+import TileGroup from '../TileGroup';
+import { getDayOfWeek } from '../shared/dates';
 
 export default function Days(props) {
   const {
@@ -74,6 +73,7 @@ export default function Days(props) {
         date.setHours(0, 0, 0, 0);
         return date;
       }}
+      dayOfWeek={dayOfWeek}
       dateType="day"
       end={end}
       offset={offset}

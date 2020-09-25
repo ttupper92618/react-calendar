@@ -62,6 +62,7 @@ export default class Tile extends Component {
       return (
         <button
           className={mergeClassNames(classes, tileClassName)}
+          data-weekday={date.toLocaleDateString()}
           disabled={
             (minDate && minDateTransform(minDate) > date)
             || (maxDate && maxDateTransform(maxDate) < date)
@@ -90,6 +91,7 @@ export default class Tile extends Component {
       return (
         <button
           className={mergeClassNames(classes, tileClassName)}
+          data-weekday={date.toLocaleDateString()}
           disabled={
             (minDate && minDateTransform(minDate) > date)
             || (maxDate && maxDateTransform(maxDate) < date)
