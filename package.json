@@ -39,44 +39,18 @@
     "month-picker",
     "react"
   ],
-  "author": {
-    "name": "Wojciech Maj",
-    "email": "kontakt@wojtekmaj.pl"
-  },
+  "author": "Wojciech Maj <kontakt@wojtekmaj.pl>",
   "contributors": [
-    {
-      "name": "Alberto Carreras"
-    },
-    {
-      "name": "Andriy Kuzyk"
-    },
-    {
-      "name": "Baldur Árnason"
-    },
-    {
-      "name": "Jack Willis-Craig"
-    },
-    {
-      "name": "JamieEgeberg"
-    },
-    {
-      "name": "Justin Davis"
-    },
-    {
-      "name": "Kevin Kipp",
-      "email": "kevin.kipp@gmail.com"
-    },
-    {
-      "name": "Ritesh Kumar",
-      "email": "rkritesh078@gmail.com"
-    },
-    {
-      "name": "Sergi Meseguer"
-    },
-    {
-      "name": "Thomas Tupper",
-      "email": "thomastupper92618@gmail.com"
-    }
+    "Alberto Carreras",
+    "Andriy Kuzyk",
+    "Baldur Árnason",
+    "Jack Willis-Craig",
+    "JamieEgeberg",
+    "Justin Davis",
+    "Kevin Kipp <kevin.kipp@gmail.com>",
+    "Ritesh Kumar <rkritesh078@gmail.com>",
+    "Sergi Meseguer",
+    "Thomas Tupper <thomastupper92618@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
@@ -120,10 +94,17 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ttupper92618/react-calendar.git"
+    "url": "git+https://github.com/ttupper92618/react-calendar.git"
   },
   "funding": "https://github.com/ttupper92618/react-calendar?sponsor=1",
   "resolutions": {
     "react-calendar": "portal:/Users/thomastupper/react-calendar"
+  },
+  "bugs": {
+    "url": "https://github.com/ttupper92618/react-calendar/issues"
+  },
+  "homepage": "https://github.com/ttupper92618/react-calendar#readme",
+  "directories": {
+    "test": "test"
   }
 }

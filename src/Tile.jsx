@@ -4,12 +4,58 @@ import PropTypes from 'prop-types';
 import mergeClassNames from 'merge-class-names';
 import { tileProps } from './shared/propTypes';
 
+let hasRangeStart = false;
+let hasRangeEnd = false;
+
 function getValue(nextProps, prop) {
   const { activeStartDate, date, view } = nextProps;
 
   return typeof prop === 'function'
     ? prop({ activeStartDate, date, view })
     : prop;
+}
+
+function getIsRangeStart(classes) {
+  let hasStart = false;
+  for (let key in classes) {
+    if(classes[key] === 'react-calendar__tile--rangeStart') {
+      hasStart = true;
+      hasRangeStart = true;
+    }
+  }
+  return hasStart;
+}
+
+function getIsRangeEnd(classes) {
+  let hasEnd = false;
+  for (let key in classes) {
+    if(classes[key] === 'react-calendar__tile--rangeEnd') {
+      hasEnd = true;
+      hasRangeEnd = true;
+    }
+  }
+  return hasEnd;
+}
+
+function getIsRangeBothEnds(classes) {
+  let isBothEnds = false;
+  for (let key in classes) {
+    if(classes[key] === 'react-calendar__tile--rangeBothEnds') {
+      isBothEnds = true;
+    }
+  }
+  return isBothEnds;
+}
+
+function getIsRangePart(classes) {
+  let hasEnd = false;
+  for (let key in classes) {
+    if(classes[key] === 'react-calendar__tile--range') {
+      hasEnd = true;
+      hasRangeEnd = true;
+    }
+  }
+  return hasEnd;
 }
 
 export default class Tile extends Component {
@@ -59,24 +105,67 @@ export default class Tile extends Component {
     const { dayMarker, tileClassName, tileContent } = this.state;
 
     if (tileContent || dayMarker) {
+      const hasStart = getIsRangeStart(classes);
+      const hasEnd = getIsRangeEnd(classes);
+      const isRangePart = getIsRangePart(classes);
+      const isRangeBothEnds = getIsRangeBothEnds(classes);
+      const divType= hasStart ? 'rangeStart' : !hasStart && hasEnd ? 'rangeEnd' : 'tile';
+      const rangeComplete = hasRangeStart && hasRangeEnd && isRangePart;
       return (
-        <button
-          className={mergeClassNames(classes, tileClassName)}
-          data-weekday={date.toLocaleDateString()}
-          disabled={
-            (minDate && minDateTransform(minDate) > date)
-            || (maxDate && maxDateTransform(maxDate) < date)
-            || (tileDisabled && tileDisabled({ activeStartDate, date, view }))
-          }
-          onClick={onClick && (event => onClick(date, event))}
-          onFocus={onMouseOver && (() => onMouseOver(date))}
-          onMouseOver={onMouseOver && (() => onMouseOver(date))}
-          role='calendar-day'
-          style={style}
-          type="button"
-        >
-          {dayMarker}
-          <div data-role='currentDayNumber' data-eventday={!!tileContent} data-currentday={new Date(date).toDateString() === new Date().toDateString()}>
+        <div data-rangebothends={isRangeBothEnds} data-rangcomponent={isRangePart} data-rangecomplete={rangeComplete} data-type={divType}>
+          <button
+            className={mergeClassNames(classes, tileClassName)}
+            data-weekday={date.toLocaleDateString()}
+            disabled={
+              (minDate && minDateTransform(minDate) > date)
+              || (maxDate && maxDateTransform(maxDate) < date)
+              || (tileDisabled && tileDisabled({ activeStartDate, date, view }))
+            }
+            onClick={onClick && (event => onClick(date, event))}
+            onFocus={onMouseOver && (() => onMouseOver(date))}
+            onMouseOver={onMouseOver && (() => onMouseOver(date))}
+            role='calendar-day'
+            style={style}
+            type="button"
+          >
+            {dayMarker}
+            <div data-role='currentDayNumber' data-eventday={!!tileContent} data-currentday={new Date(date).toDateString() === new Date().toDateString()}>
+              {formatAbbr
+                ? (
+                  <abbr aria-label={formatAbbr(locale, date)}>
+                    {children}
+                  </abbr>
+                )
+                : children}
+            </div>
+            {tileContent}
+          </button>
+        </div>);
+    } else {
+      const hasStart = getIsRangeStart(classes);
+      const hasEnd = getIsRangeEnd(classes);
+      const isRangePart = getIsRangePart(classes);
+      const isRangeBothEnds = getIsRangeBothEnds(classes);
+      const divType= hasStart ? 'rangeStart' : !hasStart && hasEnd ? 'rangeEnd' : 'tile';
+      const rangeComplete = hasRangeStart && hasRangeEnd && isRangePart;
+      return (
+        <div data-rangebothends={isRangeBothEnds} data-rangcomponent={isRangePart} data-rangecomplete={rangeComplete} data-type={divType}>
+          <button
+            className={mergeClassNames(classes, tileClassName)}
+            data-weekday={date.toLocaleDateString()}
+            disabled={
+              (minDate && minDateTransform(minDate) > date)
+              || (maxDate && maxDateTransform(maxDate) < date)
+              || (tileDisabled && tileDisabled({ activeStartDate, date, view }))
+            }
+            onClick={onClick && (event => onClick(date, event))}
+            onFocus={onMouseOver && (() => onMouseOver(date))}
+            onMouseOver={onMouseOver && (() => onMouseOver(date))}
+            role='calendar-day'
+            style={style}
+            type="button"
+          >
+            {tileContent}
             {formatAbbr
               ? (
                 <abbr aria-label={formatAbbr(locale, date)}>
@@ -84,35 +173,8 @@ export default class Tile extends Component {
                 </abbr>
               )
               : children}
-          </div>
-          {tileContent}
-        </button>);
-    } else {
-      return (
-        <button
-          className={mergeClassNames(classes, tileClassName)}
-          data-weekday={date.toLocaleDateString()}
-          disabled={
-            (minDate && minDateTransform(minDate) > date)
-            || (maxDate && maxDateTransform(maxDate) < date)
-            || (tileDisabled && tileDisabled({ activeStartDate, date, view }))
-          }
-          onClick={onClick && (event => onClick(date, event))}
-          onFocus={onMouseOver && (() => onMouseOver(date))}
-          onMouseOver={onMouseOver && (() => onMouseOver(date))}
-          role='calendar-day'
-          style={style}
-          type="button"
-        >
-          {tileContent}
-          {formatAbbr
-            ? (
-              <abbr aria-label={formatAbbr(locale, date)}>
-                {children}
-              </abbr>
-            )
-            : children}
-        </button>
+          </button>
+        </div>
       );
     }
   }
