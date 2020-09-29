@@ -348,20 +348,24 @@ export default class Calendar extends Component {
   }
 
   drillUp = () => {
-    if (!this.drillUpAvailable) {
-      return;
-    }
-
-    const { activeStartDate, view, views } = this;
     const { onDrillUp } = this.props;
-
-    const nextView = views[views.indexOf(view) - 1];
-    const nextActiveStartDate = getBegin(nextView, activeStartDate);
-
-    this.setStateAndCallCallbacks({
-      activeStartDate: nextActiveStartDate,
-      view: nextView,
-    }, undefined, onDrillUp);
+    if(onDrillUp) {
+      onDrillUp();
+    } else {
+      if (!this.drillUpAvailable) {
+        return;
+      }
+  
+      const { activeStartDate, view, views } = this;
+      const nextView = views[views.indexOf(view) - 1];
+      const nextActiveStartDate = getBegin(nextView, activeStartDate);
+  
+      this.setStateAndCallCallbacks({
+        activeStartDate: nextActiveStartDate,
+        view: nextView,
+      }, undefined, onDrillUp);
+    }
+    
   }
 
   onChange = (value, event) => {
