@@ -1,6 +1,6 @@
 {
   "name": "@tt92618/custom-react-calendar",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A customized variant of react-calendar, the ultimate calendar for your app.",
   "main": "dist/umd/index.js",
   "module": "dist/esm/index.js",
