@@ -125,12 +125,13 @@ export default class Tile extends Component {
             onFocus={onMouseOver && (() => onMouseOver(date))}
             onMouseOver={onMouseOver && (() => onMouseOver(date))}
             data-role='calendar-day'
+            data-testid='calendar-day'
             role='button'
             style={style}
             type="button"
           >
             {dayMarker}
-            <div data-role='currentDayNumber' data-eventday={!!tileContent} data-currentday={new Date(date).toDateString() === new Date().toDateString()}>
+            <div data-role='currentDayNumber' data-testid='currentDayNumber' data-eventday={!!tileContent} data-currentday={new Date(date).toDateString() === new Date().toDateString()}>
               {formatAbbr
                 ? (
                   <abbr aria-label={formatAbbr(locale, date)}>
@@ -163,6 +164,7 @@ export default class Tile extends Component {
             onFocus={onMouseOver && (() => onMouseOver(date))}
             onMouseOver={onMouseOver && (() => onMouseOver(date))}
             data-role='calendar-day'
+            data-testid='calendar-day'
             role='button'
             style={style}
             type="button"
