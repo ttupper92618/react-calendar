@@ -124,7 +124,8 @@ export default class Tile extends Component {
             onClick={onClick && (event => onClick(date, event))}
             onFocus={onMouseOver && (() => onMouseOver(date))}
             onMouseOver={onMouseOver && (() => onMouseOver(date))}
-            role='calendar-day'
+            data-role='calendar-day'
+            role='button'
             style={style}
             type="button"
           >
@@ -161,7 +162,8 @@ export default class Tile extends Component {
             onClick={onClick && (event => onClick(date, event))}
             onFocus={onMouseOver && (() => onMouseOver(date))}
             onMouseOver={onMouseOver && (() => onMouseOver(date))}
-            role='calendar-day'
+            data-role='calendar-day'
+            role='button'
             style={style}
             type="button"
           >

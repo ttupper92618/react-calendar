@@ -154,56 +154,85 @@ export default function Navigation({
   }
 
   return (
-    <div
-      className={className}
-      style={{ display: 'flex' }}
-    >
-      {prev2Label !== null && shouldShowPrevNext2Buttons && (
-        <button
-          aria-label={prev2AriaLabel}
-          className={`${className}__arrow ${className}__prev2-button`}
-          disabled={prev2ButtonDisabled}
-          onClick={onClickPrevious2}
-          type="button"
-        >
-          {prev2Label}
-        </button>
-      )}
-      {prevLabel !== null && (
-        <button
-          aria-label={prevAriaLabel}
-          className={`${className}__arrow ${className}__prev-button`}
-          disabled={prevButtonDisabled}
-          onClick={onClickPrevious}
-          type="button"
-        >
-          {prevLabel}
-        </button>
-      )}
-      {renderButton()}
-      {nextLabel !== null && (
-        <button
-          aria-label={nextAriaLabel}
-          className={`${className}__arrow ${className}__next-button`}
-          disabled={nextButtonDisabled}
-          onClick={onClickNext}
-          type="button"
-        >
-          {nextLabel}
-        </button>
-      )}
-      {next2Label !== null && shouldShowPrevNext2Buttons && (
-        <button
-          aria-label={next2AriaLabel}
-          className={`${className}__arrow ${className}__next2-button`}
-          disabled={next2ButtonDisabled}
-          onClick={onClickNext2}
-          type="button"
-        >
-          {next2Label}
-        </button>
-      )}
-    </div>
+    <>
+      <div
+        className={className}
+        style={{ display: 'flex' }}
+      >
+        {prev2Label !== null && shouldShowPrevNext2Buttons && (
+          <button
+            aria-label={prev2AriaLabel}
+            className={`${className}__arrow ${className}__prev2-button`}
+            disabled={prev2ButtonDisabled}
+            onClick={onClickPrevious2}
+            type="button"
+          >
+            {prev2Label}
+          </button>
+        )}
+        {prevLabel !== null && (
+          <button
+            aria-label={prevAriaLabel}
+            className={`${className}__arrow ${className}__prev-button`}
+            disabled={prevButtonDisabled}
+            onClick={onClickPrevious}
+            type="button"
+          >
+            <svg
+              width='16px'
+              height='16px'
+              pointerEvents='none'
+              color='#645AF0'
+              viewBox='0 0 16 16'
+            >
+              <path
+                fillRule='nonzero'
+                fill='#645AF0'
+                d='M10.53.28a.665.665 0 011.01.858l-.07.082L4.69 8l6.78 6.78a.665.665 0 01.07.858l-.07.082a.665.665 0 01-.858.07l-.082-.07-6.908-6.908a1.148 1.148 0 01-.087-1.527l.086-.097L10.53.28z'
+              />
+            </svg>
+          </button>
+        )}
+        {renderButton()}
+        {nextLabel !== null && (
+          <button
+            aria-label={nextAriaLabel}
+            className={`${className}__arrow ${className}__next-button`}
+            disabled={nextButtonDisabled}
+            onClick={onClickNext}
+            type="button"
+          >
+            <svg
+              width='16px'
+              height='16px'
+              pointerEvents='none'
+              color='#645AF0'
+              viewBox='0 0 16 16'
+            >
+              <path
+                fillRule='nonzero'
+                fill='#645AF0'
+                d='M3.48.28a.665.665 0 01.858-.07l.082.07 6.908 6.908a1.148 1.148 0 01.087 1.527l-.086.097L4.42 15.72a.665.665 0 01-1.01-.858l.07-.082 6.779-6.781-6.78-6.779a.665.665 0 01-.07-.858L3.48.28z'
+              />
+            </svg>
+          </button>
+        )}
+        {next2Label !== null && shouldShowPrevNext2Buttons && (
+          <button
+            aria-label={next2AriaLabel}
+            className={`${className}__arrow ${className}__next2-button`}
+            disabled={next2ButtonDisabled}
+            onClick={onClickNext2}
+            type="button"
+          >
+            {next2Label}
+          </button>
+        )}
+      </div>
+      <div style={{'width':'100%', 'height':'2px', 'transform':'translateY(-10px)', 'display':'flex', 'justifyContent':'center'}}>
+        <div style={{'width':'32px', 'height':'2px', 'borderTop': '1px solid #0F0F32'}}></div>
+      </div>
+    </>
   );
 }
 
