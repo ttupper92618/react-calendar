@@ -141,7 +141,7 @@ export default function Navigation({
           <>
             <span className={`${labelClassName}__divider`}>
               {' '}
-              –
+              to
               {' '}
             </span>
             <span className={`${labelClassName}__labelText ${labelClassName}__labelText--to`}>
